@@ -134,8 +134,9 @@ export default function ProgressView({ user, data }) {
   }
 
   // Streak — relaxed logic: ≥5 daily + weekly goals met per completed week
+  // Only count days that have fully passed (not today)
   let streak = 0;
-  let d = today;
+  let d = addDays(today, -1);
   while (daysBetween(startDate, d) >= 0) {
     const dayData = days[d];
     if (isDayGoodForStreak(user, dayData, days, d, today)) {
